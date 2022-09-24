@@ -4,7 +4,7 @@ function counter() {
   let timerDiv = document.getElementById("timer");
 
   let timer = setInterval(function () {
-    timerDiv.innerHTML = `Voltando à home em ${countdown}`;
+    timerDiv.innerHTML = `Volviendo a Home en ${countdown}`;
     countdown--;
     if (countdown === 0) {
       clearInterval(timer);
