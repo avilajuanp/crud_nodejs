@@ -25,13 +25,13 @@ class UserController {
         ciudad,
         provincia
       }).then(() => {
-        response.render("mensaje", {
-          mensaje: "Usuario creado con éxito"
+        response.render("message", {
+          message: "Usuario creado con éxito"
         });
       });
     } catch (err) {
-      response.render("mensaje", {
-        mensaje: `Error al crear usuario: ${err.mensaje}`
+      response.render("message", {
+        message: `Error al crear usuario: ${err.message}`
       });
     }
   }
@@ -41,13 +41,13 @@ class UserController {
 
     try {
       await this.userService.deleteUser(id).then(() => {
-        response.render("mensaje", {
-          mensaje: "Usuario borrado con éxito"
+        response.render("message", {
+          message: "Usuario borrado con éxito"
         });
       });
     } catch (err) {
-      response.render("mensaje", {
-        mensaje: `Error al borrar usuario: ${err.mensaje}`
+      response.render("message", {
+        message: `Error al borrar usuario: ${err.message}`
       });
     }
   }
@@ -87,8 +87,8 @@ class UserController {
         search: search
       });
     } catch (err) {
-      response.render("mensaje", {
-        mensaje: `Error al buscar usuario: ${err.mensaje}`
+      response.render("message", {
+        message: `Error al buscar usuario: ${err.message}`
       });
     }
   }
@@ -100,13 +100,13 @@ class UserController {
 
     try {
       await userService.updateUser({ id, username, email, telefono, ciudad, provincia }).then(() => {
-        response.render("mensaje", {
-          mensaje: "Usuario actualizado con éxito"
+        response.render("message", {
+          message: "Usuario actualizado con éxito"
         });
       });
     } catch (err) {
-      response.render("mensaje", {
-        mensaje: `Error al actualiar usuario: ${err.mensaje}`
+      response.render("message", {
+        message: `Error al actualiar usuario: ${err.message}`
       });
     }
   }

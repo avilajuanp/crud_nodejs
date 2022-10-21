@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRUD Node.js</title>
+  <title>CRUD Node.js IES 9-023</title>
   <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -31,7 +31,7 @@
             <a class="nav-link active" aria-current="page" href="./">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./add">Adicionar usuário</a>
+            <a class="nav-link active" aria-current="page" href="./add">Agregar Usuario</a>
           </li>
         </ul>
         <form class="d-flex" action="./search" method="GET">
@@ -44,7 +44,7 @@
   <br>
   <div class="container">
     <div class="text-center">
-      <h2>Tabela de usuários</h2>
+      <h2>Tabla de Usuarios</h2>
     </div>
     <br>
     <form action="./add-user" method="POST">
@@ -61,20 +61,20 @@
           <input type="text" name="email" id="email" class="form-control">
         </div>
         <div class="col-6">
-          <label for="telefone" class="form-label">Telefone</label>
-          <input type="text" name="telefone" id="telefone" class="form-control">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input type="text" name="telefono" id="telefono" class="form-control">
         </div>
       </div>
       <br>
       <div class="row">
         <div class="col-6">
-          <label for="cidade" class="form-label">Cidade</label>
-          <input type="text" name="cidade" id="cidade" class="form-control">
+          <label for="ciudad" class="form-label">Ciudad</label>
+          <input type="text" name="ciudad" id="ciudad" class="form-control">
         </div>
         <div class="col-6">
-          <label for="estado" class="form-label">Estado</label>
-          <select name="estado" id="estado" class="form-select">
-            <option value="" selected disabled>Selecione seu estado</option>
+          <label for="provincia" class="form-label">Provincia</label>
+          <select name="provincia" id="provincia" class="form-select">
+            <option value="" selected disabled>Seleccione su provincia</option>
             <option value="AC">Acre</option>
             <option value="AL">Alagoas</option>
             <option value="AP">Amapá</option>
@@ -109,12 +109,12 @@
       <div class="row">
         <div class="col-6">
           <div class="float-start">
-            <button type="submit" class="btn primary-btn">Adicionar usuário</button>
+            <button type="submit" class="btn primary-btn">Agregar usuario</button>
           </div>
         </div>
         <div class="col-6">
           <div class="float-end">
-            <a href="./" class="btn secondary-btn">Voltar à home</a>
+            <a href="./" class="btn secondary-btn">Volver al Home</a>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@
             <a class="nav-link active" aria-current="page" href="./">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./add">Adicionar usuário</a>
+            <a class="nav-link active" aria-current="page" href="./add">Agregar Usuario</a>
           </li>
         </ul>
         <form class="d-flex" action="./search" method="GET">
@@ -53,12 +53,12 @@
       <thead>
         <th scope="col">Username</th>
         <th scope="col">Email</th>
-        <th scope="col">Telefone</th>
-        <th scope="col">Cidade</th>
-        <th scope="col">Estado</th>
-        <th scope="col">Criação</th>
-        <th scope="col">Atualização</th>
-        <th scope="col">Ações</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Ciudad</th>
+        <th scope="col">Provincia</th>
+        <th scope="col">Creado</th>
+        <th scope="col">Actualizado</th>
+        <th scope="col">Acciones</th>
       </thead>
       <tbody>
         <% users.forEach(function(user) { %>
@@ -70,13 +70,13 @@
               <%= user.email %>
             </td>
             <td>
-              <%= user.telefone %>
+              <%= user.telefono %>
             </td>
             <td>
-              <%= user.cidade %>
+              <%= user.ciudad %>
             </td>
             <td>
-              <%= user.estado %>
+              <%= user.provincia %>
             </td>
             <td>
               <%= user.created_at.toLocaleDateString() %>
