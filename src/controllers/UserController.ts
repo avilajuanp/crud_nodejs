@@ -56,11 +56,9 @@ class UserController {
     let { id } = request.query;
     id = id.toString();
 
-    const userService = new UserService();
+    const user = await this.userService.getUserData(id);
 
-    const user = await userService.getUserData(id);
-
-    return response.render("edit", {
+    return response.render("users/edit", {
       user: user
     });
   }
@@ -78,11 +76,9 @@ class UserController {
     let { search } = request.query;
     search = search.toString();
 
-    const userService = new UserService();
-
     try {
-      const users = await userService.searchUser(search);
-      response.render("search", {
+      const users = await this.userService.searchUser(search);
+      response.render("users/search", {
         users: users,
         search: search
       });
@@ -96,17 +92,15 @@ class UserController {
   async handleUpdateUser(request: Request, response: Response) {
     const { id, username, email, telefono, ciudad, provincia } = request.body;
 
-    const userService = new UserService();
-
     try {
-      await userService.updateUser({ id, username, email, telefono, ciudad, provincia }).then(() => {
+      await this.userService.updateUser({ id, username, email, telefono, ciudad, provincia }).then(() => {
         response.render("message", {
           message: "Usuario actualizado con éxito"
         });
       });
     } catch (err) {
       response.render("message", {
-        message: `Error al actualiar usuario: ${err.message}`
+        message: `Error al actualizar usuario: ${err.message}`
       });
     }
   }
