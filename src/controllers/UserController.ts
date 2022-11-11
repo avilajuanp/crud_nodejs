@@ -3,7 +3,7 @@ import UserService from "../services/UserService";
 
 class UserController {
   //instanciamos userService global para todos los métodos
-  private userService;
+  private userService: UserService;
   constructor() {
     this.userService = new UserService();
     this.handleCreateUser = this.handleCreateUser.bind(this);
