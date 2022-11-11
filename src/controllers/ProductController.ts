@@ -3,7 +3,7 @@ import ProductService from "../services/ProductService";
 
 class ProductController {
   //instanciamos ProductService global para todos los métodos
-  private productService;
+  private productService: ProductService;
   constructor() {
     this.productService = new ProductService();
     this.handleCreateProduct = this.handleCreateProduct.bind(this);
@@ -66,7 +66,7 @@ class ProductController {
 
     const products = await this.productService.listProducts();
 
-    return response.render("index", {
+    return response.render("products/list", {
       products: products
     });
   }

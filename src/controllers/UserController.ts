@@ -67,7 +67,7 @@ class UserController {
 
     const users = await this.userService.listUsers();
 
-    return response.render("index", {
+    return response.render("users/list", {
       users: users
     });
   }

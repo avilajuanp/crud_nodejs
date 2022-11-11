@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { request, Router } from "express";
 import ProductController from "./controllers/ProductController";
 import UserController from "./controllers/UserController";
 
@@ -6,6 +6,10 @@ const router = Router();
 
 const userController = new UserController();
 const productController = new ProductController();
+
+router.get("/", (request, response) => {
+  response.render("index");
+});
 
 router.get("/users", userController.handleListUsers);
 router.get("/products", productController.handleListProducts);

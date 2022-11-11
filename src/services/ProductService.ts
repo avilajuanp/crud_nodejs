@@ -1,17 +1,18 @@
 import { getCustomRepository } from "typeorm";
+import { Category } from "../entities/Category";
 import { Product } from "../entities/Product";
-import { ProductsRepository } from "../repositories/ProductRepository";
+import { ProductsRepository } from "../repositories/ProductsRepository";
 
 interface IProduct {
   id?: string;
   nombre: string;
-  categoria: string;
+  categoria: Category;
   precio: number;
 }
 
 class ProductService {
   //instanciamos ProductRepository global para todos los métodos
-  private productsRepository;
+  private productsRepository: ProductsRepository;
   constructor() {
     this.productsRepository = new ProductsRepository();
     this.createProduct = this.createProduct.bind(this)
@@ -33,7 +34,7 @@ class ProductService {
       throw new Error("Producto ya existe");
     }
 
-    const product = this.productsRepository.create({ nombre, categoria, precio });
+    const product = this.productsRepository.create({nombre, precio, categoria});
 
     await this.productsRepository.save(product);
 
