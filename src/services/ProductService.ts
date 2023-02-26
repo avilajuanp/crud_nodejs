@@ -12,38 +12,39 @@ interface IProduct {
 
 class ProductService {
   //instanciamos ProductRepository global para todos los métodos
-  private productsRepository: ProductsRepository;
-  constructor() {
-    this.productsRepository = new ProductsRepository();
-    this.createProduct = this.createProduct.bind(this)
-    this.deleteProduct = this.deleteProduct.bind(this)
-    this.getProductData = this.getProductData.bind(this)
-    this.listProducts = this.listProducts.bind(this)
-    this.searchProduct = this.searchProduct.bind(this)
-    this.updateProduct = this.updateProduct.bind(this)
-  }
+  // private productsRepository = getCustomRepository(ProductsRepository);
+  // constructor() {
+  //   this.productsRepository = new ProductsRepository();
+  //   this.createProduct = this.createProduct.bind(this)
+  //   this.deleteProduct = this.deleteProduct.bind(this)
+  //   this.getProductData = this.getProductData.bind(this)
+  //   this.listProducts = this.listProducts.bind(this)
+  //   this.searchProduct = this.searchProduct.bind(this)
+  //   this.updateProduct = this.updateProduct.bind(this)
+  // }
 
   async createProduct({ nombre,categoria,precio }: IProduct) {
     if (!nombre || !categoria || !precio) {
       throw new Error("Por favor complete todos los campos");
     }
-
-    const productAlreadyExists = await this.productsRepository.findOne({ nombre });
+    const productsRepository = getCustomRepository(ProductsRepository);
+    const productAlreadyExists = await productsRepository.findOne({ nombre });
 
     if (productAlreadyExists) {
       throw new Error("Producto ya existe");
     }
 
-    const product = this.productsRepository.create({nombre, precio, categoria});
+    const product = productsRepository.create({nombre, precio, categoria});
 
-    await this.productsRepository.save(product);
+    await productsRepository.save(product);
 
     return product;
 
   }
 
   async deleteProduct(id: string) {
-    const product = await this.productsRepository
+    const productsRepository = getCustomRepository(ProductsRepository);
+    const product = await productsRepository
       .createQueryBuilder()
       .delete()
       .from(Product)
@@ -55,13 +56,15 @@ class ProductService {
   }
 
   async getProductData(id: string) {
-    const product = await this.productsRepository.findOne(id);
+    const productsRepository = getCustomRepository(ProductsRepository);
+    const product = await productsRepository.findOne(id);
 
     return product;
   }
 
   async listProducts() {
-    const products = await this.productsRepository.find();
+    const productsRepository = getCustomRepository(ProductsRepository);
+    const products = await productsRepository.find();
 
     return products;
   }
@@ -70,8 +73,8 @@ class ProductService {
     if (!search) {
       throw new Error("Por favor ingrese un término a buscar");
     }
-
-    const product = await this.productsRepository
+    const productsRepository = getCustomRepository(ProductsRepository);
+    const product = await productsRepository
       .createQueryBuilder()
       .where("nombre like :search", { search: `%${search}%` })
       .orWhere("categoria like :search", { search: `%${search}%` })
@@ -83,7 +86,8 @@ class ProductService {
   }
 
   async updateProduct({ id, nombre, categoria, precio }: IProduct) {
-    const product = await this.productsRepository
+    const productsRepository = getCustomRepository(ProductsRepository);
+    const product = await productsRepository
       .createQueryBuilder()
       .update(Product)
       .set({ nombre, categoria, precio })
