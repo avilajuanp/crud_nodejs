@@ -1,3 +1,4 @@
+import { getCustomRepository } from "typeorm";
 import { Category } from "../entities/Category";
 import { Product } from "../entities/Product";
 import { CategoriesRepository } from "../repositories/CategoriesRepository";
@@ -9,39 +10,29 @@ interface ICategory {
 }
 
 class CategoryService {
-  //instanciamos CategoryRepository global para todos los métodos
-  private categoriesRepository: CategoriesRepository;
-  constructor() {
-    this.categoriesRepository = new CategoriesRepository();
-    this.createCategory = this.createCategory.bind(this)
-    this.deleteCategory = this.deleteCategory.bind(this)
-    this.getCategoryData = this.getCategoryData.bind(this)
-    this.listCategories = this.listCategories.bind(this)
-    this.searchCategory = this.searchCategory.bind(this)
-    this.updateCategory = this.updateCategory.bind(this)
-  }
 
   async createCategory({ nombre, productos }: ICategory) {
     if (!nombre || !productos) {
       throw new Error("Por favor complete todos los campos");
     }
-
-    const categoryAlreadyExists = await this.categoriesRepository.findOne({ nombre });
+    const categoriesRepository = getCustomRepository(CategoriesRepository);
+    const categoryAlreadyExists = await categoriesRepository.findOne({ nombre });
 
     if (categoryAlreadyExists) {
       throw new Error("Categoría ya existe");
     }
 
-    const category = this.categoriesRepository.create({nombre, productos});
+    const category = categoriesRepository.create({nombre, productos});
 
-    await this.categoriesRepository.save(category);
+    await categoriesRepository.save(category);
 
     return category;
 
   }
 
   async deleteCategory(id: string) {
-    const category = await this.categoriesRepository
+    const categoriesRepository = getCustomRepository(CategoriesRepository);
+    const category = await categoriesRepository
       .createQueryBuilder()
       .delete()
       .from(Category)
@@ -53,23 +44,26 @@ class CategoryService {
   }
 
   async getCategoryData(id: string) {
-    const category = await this.categoriesRepository.findOne(id);
+    const categoriesRepository = getCustomRepository(CategoriesRepository);
+    const category = await categoriesRepository.findOne(id);
 
     return category;
   }
 
   async listCategories() {
-    const categories = await this.categoriesRepository.find();
+    const categoriesRepository = getCustomRepository(CategoriesRepository);
+    const categories = await categoriesRepository.find();
 
     return categories;
   }
 
   async searchCategory(search: string) {
+    
     if (!search) {
       throw new Error("Por favor ingrese un término a buscar");
     }
-
-    const category = await this.categoriesRepository
+    const categoriesRepository = getCustomRepository(CategoriesRepository);
+    const category = await categoriesRepository
       .createQueryBuilder()
       .where("nombre like :search", { search: `%${search}%` })
       .orWhere("productos like :search", { search: `%${search}%` })
@@ -80,7 +74,8 @@ class CategoryService {
   }
 
   async updateCategory({ id, nombre, productos }: ICategory) {
-    const category = await this.categoriesRepository
+    const categoriesRepository = getCustomRepository(CategoriesRepository);
+    const category = await categoriesRepository
       .createQueryBuilder()
       .update(Category)
       .set({ nombre, productos })
