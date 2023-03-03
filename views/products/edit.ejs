@@ -20,7 +20,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="./"><img src="img/icon.png" alt="Node.js icon" class="nav-icon"></a>
+      <a class="navbar-brand" href="/"><img src="/img/icon.png" alt="Node.js icon" class="nav-icon"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -28,96 +28,60 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./add">Agregar Usuario</a>
+            <a class="nav-link active" aria-current="page" href="/users">Usuarios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/products">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/categories">Categorías</a>
           </li>
         </ul>
         <form class="d-flex" action="./search" method="GET">
-          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar usuario" aria-label="Buscar usuario" name="search">
           <button class="btn secondary-btn" type="submit">Buscar</button>
         </form>
       </div>
     </div>
   </nav>
-  <br>
   <div class="container">
     <div class="text-center">
-      <h2>Tabla de Usuarios</h2>
+      <h2>Editar Producto</h2>
     </div>
-    <br>
-    <form action="./edit-user" method="POST">
-      <input type="hidden" name="id" value="<%= user.id %>">
+    <form action="./edit-product" method="POST">
+      <input type="hidden" name="id" value="<%= product.id %>">
       <div class="row">
         <div class="col-12">
-          <label for="username" class="form-label">Username</label>
-          <input type="text" name="username" id="username" class="form-control" value="<%= user.username %>">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" name="nombre" id="nombre" class="form-control" value="<%= product.nombre %>">
         </div>
       </div>
-      <br>
       <div class="row">
         <div class="col-6">
-          <label for="email" class="form-label">Email</label>
-          <input type="text" name="email" id="email" class="form-control" value="<%= user.email %>">
+          <label for="precio" class="form-label">Precio</label>
+          <input type="text" name="precio" id="precio" class="form-control" value="<%= product.precio %>">
         </div>
         <div class="col-6">
-          <label for="telefono" class="form-label">Telefono</label>
-          <input type="text" name="telefono" id="telefono" class="form-control" value="<%= user.telefono %>">
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-6">
-          <label for="ciudad" class="form-label">Ciudad</label>
-          <input type="text" name="ciudad" id="ciudad" class="form-control" value="<%= user.ciudad %>">
-        </div>
-        <div class="col-6">
-          <label for="provincia" class="form-label">Provincia</label>
-          <select name="provincia" id="provincia" class="form-select">
-            <option value="<%= user.provincia %>" selected>
-              <%= user.provincia %>
+          <label for="categoria" class="form-label">Categoría</label>
+          <select name="categoria" id="categoria" class="form-select">
+            <option value="<%= product.categoria %>" selected>
+              <%= product.categoria %>
             </option>
-            <option value="AC">Acre</option>
-            <option value="AL">Alagoas</option>
-            <option value="AP">Amapá</option>
-            <option value="AM">Amazonas</option>
-            <option value="BA">Bahia</option>
-            <option value="CE">Ceará</option>
-            <option value="DF">Distrito Federal</option>
-            <option value="ES">Espírito Santo</option>
-            <option value="GO">Goiás</option>
-            <option value="MA">Maranhão</option>
-            <option value="MT">Mato Grosso</option>
-            <option value="MS">Mato Grosso do Sul</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="PA">Pará</option>
-            <option value="PB">Paraíba</option>
-            <option value="PR">Paraná</option>
-            <option value="PE">Pernambuco</option>
-            <option value="PI">Piauí</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="RN">Rio Grande do Norte</option>
-            <option value="RS">Rio Grande do Sul</option>
-            <option value="RO">Rondônia</option>
-            <option value="RR">Roraima</option>
-            <option value="SC">Santa Catarina</option>
-            <option value="SP">São Paulo</option>
-            <option value="SE">Sergipe</option>
-            <option value="TO">Tocantins</option>
           </select>
         </div>
       </div>
-      <br>
       <div class="row">
         <div class="col-6">
           <div class="float-start">
-            <button type="submit" class="btn primary-btn">Actualizar usuario</button>
+            <a href="./" class="btn secondary-btn">Volver a lista de Productos</a>
           </div>
         </div>
         <div class="col-6">
           <div class="float-end">
-            <a href="./" class="btn secondary-btn">Volver a Home</a>
+            <button type="submit" class="btn primary-btn">Actualizar Producto</button>
           </div>
         </div>
       </div>

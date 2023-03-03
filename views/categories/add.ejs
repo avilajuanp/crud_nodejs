@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRUD Node.js IES 9-023 - Productos</title>
+  <title>CRUD Node.js IES 9-023 - Categorías</title>
   <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -41,7 +41,7 @@
           </li>
         </ul>
         <form class="d-flex" action="./search" method="GET">
-          <input class="form-control me-2" type="search" placeholder="Buscar producto" aria-label="Buscar producto" name="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar categoria" aria-label="Buscar categoria" name="search">
           <button class="btn secondary-btn" type="submit">Buscar</button>
         </form>
       </div>
@@ -50,10 +50,10 @@
   <br>
   <div class="container">
     <div class="text-center">
-      <h2>Carga de Producto Nuevo</h2>
+      <h2>Carga de Categoría Nueva</h2>
     </div>
     <br>
-    <form action="./add-product" method="POST">
+    <form action="./add-category" method="POST">
       <div class="row">
         <div class="col-12">
           <label for="nombre" class="form-label">Nombre</label>
@@ -62,27 +62,13 @@
       </div>
       <div class="row">
         <div class="col-6">
-          <label for="precio" class="form-label">Precio</label>
-          <input type="text" name="precio" id="precio" class="form-control">
-        </div>
-        <div class="col-6">
-          <label for="categoria" class="form-label">Categoría</label>
-          <select name="categoria" id="categoria" class="form-select">
-            <option value="" selected disabled>Seleccione su categoría</option>
-           
-          </select>
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-6">
           <div class="float-start">
-            <a href="./" class="btn secondary-btn">Volver a Lista de Productos</a>
+            <a href="./" class="btn secondary-btn">Volver a Lista de Categorias</a>
           </div>
         </div>
         <div class="col-6">
           <div class="float-end">
-            <button type="submit" class="btn primary-btn">Agregar producto</button>
+            <button type="submit" class="btn primary-btn">Agregar categoría</button>
           </div>
         </div>
       </div>

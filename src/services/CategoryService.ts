@@ -16,6 +16,7 @@ class CategoryService {
       throw new Error("Por favor complete todos los campos");
     }
     const categoriesRepository = getCustomRepository(CategoriesRepository);
+    
     const categoryAlreadyExists = await categoriesRepository.findOne({ nombre });
 
     if (categoryAlreadyExists) {
