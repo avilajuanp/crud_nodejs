@@ -2,12 +2,20 @@ import { request, response, Router } from "express";
 import CategoryController from "./controllers/CategoryController";
 import ProductController from "./controllers/ProductController";
 import UserController from "./controllers/UserController";
+import { Category } from "./entities/Category";
+import CategoryService from "./services/CategoryService";
 
 const router = Router();
 
 const userController = new UserController();
 const productController = new ProductController();
 const categoryController = new CategoryController();
+const categoryService = new CategoryService();
+const categories = [
+  {id: "01", nombre: 'aaa'},
+  {id: "02", nombre: 'bbb'},
+  {id: "03", nombre: 'ccc'},
+];
 
 router.get("/", (request, response) => {
   response.render("index");
@@ -21,7 +29,7 @@ router.get("/users/add", (request, response) => {
   response.render("users/add");
 });
 router.get("/products/add", (request, response) => {
-  response.render("products/add");
+  response.render("products/add", {categories});
 });
 router.get("/categories/add", (request, response) => {
   response.render("categories/add");
