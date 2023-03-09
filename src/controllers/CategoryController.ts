@@ -15,12 +15,11 @@ class CategoryController {
   }
 
   async handleCreateCategory(request: Request, response: Response) {
-    const { nombre, productos } = request.body;
+    const { nombre } = request.body;
 
     try {
       await this.categoryService.createCategory({
-        nombre,
-        productos
+        nombre
       }).then(() => {
         response.render("message", {
           message: "Categoría creada con éxito"
@@ -91,7 +90,7 @@ class CategoryController {
     const { id, nombre, productos } = request.body;
 
     try {
-      await this.categoryService.updateCategory({ id, nombre, productos }).then(() => {
+      await this.categoryService.updateCategory({ id, nombre }).then(() => {
         response.render("message", {
           message: "Categoría actualizada con éxito"
         });

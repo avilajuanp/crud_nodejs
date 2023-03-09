@@ -70,7 +70,7 @@
           <select name="categoria" id="categoria" class="form-select">
             <option value="" selected disabled>Seleccione su categoría</option>
             <% categories.forEach(function(category) { %>
-              <option value="<% category.id %>"><% category.nombre %></option>
+            <option value="<%= category.id %>"><%= category.nombre %></option>
             <% }) %>
           </select>
         </div>

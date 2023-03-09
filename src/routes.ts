@@ -3,6 +3,7 @@ import CategoryController from "./controllers/CategoryController";
 import ProductController from "./controllers/ProductController";
 import UserController from "./controllers/UserController";
 import { Category } from "./entities/Category";
+import { CategoriesRepository } from "./repositories/CategoriesRepository";
 import CategoryService from "./services/CategoryService";
 
 const router = Router();
@@ -11,11 +12,6 @@ const userController = new UserController();
 const productController = new ProductController();
 const categoryController = new CategoryController();
 const categoryService = new CategoryService();
-const categories = [
-  {id: "01", nombre: 'aaa'},
-  {id: "02", nombre: 'bbb'},
-  {id: "03", nombre: 'ccc'},
-];
 
 router.get("/", (request, response) => {
   response.render("index");
@@ -28,7 +24,8 @@ router.get("/categories", categoryController.handleListCategories);
 router.get("/users/add", (request, response) => {
   response.render("users/add");
 });
-router.get("/products/add", (request, response) => {
+router.get("/products/add", async (request, response) => {
+  const categories: Category[] = await categoryService.listCategories();
   response.render("products/add", {categories});
 });
 router.get("/categories/add", (request, response) => {
@@ -48,11 +45,11 @@ router.get("/products/edit", productController.handleGetProductData);
 router.get("/categories/edit", categoryController.handleGetCategoryData);
 
 router.post("/users/edit-user", userController.handleUpdateUser);
-router.post("/products/edit-products", productController.handleUpdateProduct);
-router.post("/categories/edit-categories", categoryController.handleUpdateCategory);
+router.post("/products/edit-product", productController.handleUpdateProduct);
+router.post("/categories/edit-category", categoryController.handleUpdateCategory);
 
 router.post("/users/delete-user", userController.handleDeleteUser);
 router.post("/products/delete-products", productController.handleDeleteProduct);
-router.post("categories/delete", categoryController.handleDeleteCategory);
+router.post("categories/delete-category", categoryController.handleDeleteCategory);
 
 export { router };

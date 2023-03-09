@@ -6,13 +6,13 @@ import { CategoriesRepository } from "../repositories/CategoriesRepository";
 interface ICategory {
   id?: string;
   nombre: string;
-  productos: Product[];
+  // productos: Product[];
 }
 
 class CategoryService {
 
-  async createCategory({ nombre, productos }: ICategory) {
-    if (!nombre || !productos) {
+  async createCategory({ nombre }: ICategory) {
+    if (!nombre ) {
       throw new Error("Por favor complete todos los campos");
     }
     const categoriesRepository = getCustomRepository(CategoriesRepository);
@@ -23,7 +23,7 @@ class CategoryService {
       throw new Error("Categoría ya existe");
     }
 
-    const category = categoriesRepository.create({nombre, productos});
+    const category = categoriesRepository.create({ nombre });
 
     await categoriesRepository.save(category);
 
@@ -74,12 +74,12 @@ class CategoryService {
 
   }
 
-  async updateCategory({ id, nombre, productos }: ICategory) {
+  async updateCategory({ id, nombre }: ICategory) {
     const categoriesRepository = getCustomRepository(CategoriesRepository);
     const category = await categoriesRepository
       .createQueryBuilder()
       .update(Category)
-      .set({ nombre, productos })
+      .set({ nombre })
       .where("id = :id", { id })
       .execute();
 
