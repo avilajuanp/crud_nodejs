@@ -67,7 +67,7 @@ class CategoryService {
     const category = await categoriesRepository
       .createQueryBuilder()
       .where("nombre like :search", { search: `%${search}%` })
-      .orWhere("productos like :search", { search: `%${search}%` })
+      //.orWhere("productos like :search", { search: `%${search}%` })
       .getMany();
 
     return category;

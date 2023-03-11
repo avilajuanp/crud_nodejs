@@ -64,7 +64,11 @@ class ProductService {
 
   async listProducts() {
     const productsRepository = getCustomRepository(ProductsRepository);
-    const products = await productsRepository.find();
+    //const products = await productsRepository.find();
+    const products = await productsRepository.createQueryBuilder('products')
+      .leftJoinAndSelect('products.categoria','categories')
+      .select(['products', 'categories.nombre'])
+      .getMany();
 
     return products;
   }
@@ -77,7 +81,7 @@ class ProductService {
     const product = await productsRepository
       .createQueryBuilder()
       .where("nombre like :search", { search: `%${search}%` })
-      .orWhere("categoria like :search", { search: `%${search}%` })
+      //.orWhere("id_categoria like :search", { search: `%${search}%` })
       .orWhere("precio like :search", { search: `%${search}%` })
       .getMany();
 
