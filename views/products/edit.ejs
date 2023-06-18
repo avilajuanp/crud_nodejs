@@ -25,13 +25,13 @@
     </div>
     <form action="./edit-product" method="POST">
       <input type="hidden" name="id" value="<%= product.id %>">
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-12">
           <label for="nombre" class="form-label">Nombre</label>
           <input type="text" name="nombre" id="nombre" class="form-control" value="<%= product.nombre %>">
         </div>
       </div>
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-6">
           <label for="precio" class="form-label">Precio</label>
           <input type="text" name="precio" id="precio" class="form-control" value="<%= product.precio %>">
@@ -46,7 +46,7 @@
           </select>
         </div>
       </div>
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-6">
           <div class="float-start">
             <a href="./" class="btn secondary-btn">Volver a lista de Productos</a>

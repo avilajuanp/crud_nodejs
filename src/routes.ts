@@ -50,6 +50,6 @@ router.post("/categories/edit-category", categoryController.handleUpdateCategory
 
 router.post("/users/delete-user", userController.handleDeleteUser);
 router.post("/products/delete-products", productController.handleDeleteProduct);
-router.post("categories/delete-category", categoryController.handleDeleteCategory);
+router.post("/categories/delete-category", categoryController.handleDeleteCategory);
 
 export { router };
