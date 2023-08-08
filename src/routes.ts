@@ -13,6 +13,11 @@ const productController = new ProductController();
 const categoryController = new CategoryController();
 const categoryService = new CategoryService();
 
+//cuando este listo Signin, lo pongo como root de la "/"
+// router.get("/", (request, response) => {
+//   response.render("auth/signin");
+// })
+
 router.get("/", (request, response) => {
   response.render("index");
 });

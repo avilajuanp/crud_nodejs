@@ -24,15 +24,23 @@ class ProductController {
         categoria,
         precio
       }).then(() => {
-        response.render("message", {
-          message: "Producto creado con éxito"
-        });
+        request.flash("success", "Producto creado con éxito")
+        response.redirect("/products")
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al crear producto: ${err.message}`
-      });
+      request.flash("error", "Error al crear producto: ${err.message}");
+      response.redirect("/products");
     }
+    //   }).then(() => {
+    //     response.render("message", {
+    //       message: "Producto creado con éxito"
+    //     });
+    //   });
+    // } catch (err) {
+    //   response.render("message", {
+    //     message: `Error al crear producto: ${err.message}`
+    //   });
+    // }
   }
 
   async handleDeleteProduct(request: Request, response: Response) {
@@ -40,19 +48,28 @@ class ProductController {
 
     try {
       await this.productService.deleteProduct(id).then(() => {
-        response.render("message", {
-          message: "Producto borrado con éxito"
-        });
+        request.flash("success", "Producto borrado con éxito")
+        response.redirect("/products")
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al borrar producto: ${err.message}`
-      });
+      request.flash("error", `Error al borrar producto: ${err.message}`);
+      response.redirect("/products");
     }
+    // try {
+    //   await this.productService.deleteProduct(id).then(() => {
+    //     response.render("message", {
+    //       message: "Producto borrado con éxito"
+    //     });
+    //   });
+    // } catch (err) {
+    //   response.render("message", {
+    //     message: `Error al borrar producto: ${err.message}`
+    //   });
+    // }
   }
 
   async handleGetProductData(request: Request, response: Response) {
-    
+
     let { id } = request.query;
     id = id.toString();
     const categoryService = new CategoryService();
@@ -62,7 +79,7 @@ class ProductController {
 
     return response.render("products/edit", {
       product: product,
-      categories
+      categories: categories
     });
   }
 
@@ -86,9 +103,8 @@ class ProductController {
         search: search
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al buscar producto: ${err.message}`
-      });
+      request.flash("error", `Error al buscar producto: ${err.message}`);
+      response.redirect("/products");
     }
   }
 
@@ -97,14 +113,12 @@ class ProductController {
 
     try {
       await this.productService.updateProduct({ id, nombre, categoria, precio }).then(() => {
-        response.render("message", {
-          message: "Producto actualizado con éxito"
-        });
+        request.flash("success", "Producto modificado con éxito");
+        response.redirect("/products");
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al actualizar producto: ${err.message}`
-      });
+      request.flash("error", `Error al actualizar producto: ${err.message}`);
+      response.redirect("/products");
     }
   }
 }

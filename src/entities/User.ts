@@ -10,6 +10,9 @@ class User {
   @Column()
   username: string;
 
+  @Column({nullable:false})
+  password: string
+
   @Column()
   email: string;
 

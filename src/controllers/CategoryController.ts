@@ -21,15 +21,17 @@ class CategoryController {
       await this.categoryService.createCategory({
         nombre
       }).then(() => {
-        response.render("message", {
-          message: "Categoría creada con éxito"
-        });
+        request.flash("success", "Categoría creada con éxito")
+        response.redirect("/categories")
+        // response.render("message", {
+        //   message: "Categoría creada con éxito"
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al crear categoría: ${err.message}`
-      });
-    }
+      request.flash("error", `Error al crear categoría: ${err.message}`);
+      response.redirect("/categories");
+      // response.render("message", {
+      // message: `Error al crear categoría: ${err.message}`
+    };
   }
 
   async handleDeleteCategory(request: Request, response: Response) {
@@ -37,19 +39,27 @@ class CategoryController {
 
     try {
       await this.categoryService.deleteCategory(id).then(() => {
-        response.render("message", {
-          message: "Categoría borrada con éxito"
-        });
+        request.flash("success", "Categoría borrada con éxito")
+        response.redirect("/categories")
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al borrar categoría: ${err.message}`
-      });
-    }
+      request.flash("error", `Error al borrar categoría: ${err.message}`);
+      response.redirect("/categories");
+    };
   }
+  //       response.render("message", {
+  //         message: "Categoría borrada con éxito"
+  //       });
+  //     });
+  //   } catch (err) {
+  //     response.render("message", {
+  //       message: `Error al borrar categoría: ${err.message}`
+  //     });
+  //   }
+  // }
 
   async handleGetCategoryData(request: Request, response: Response) {
-    
+
     let { id } = request.query;
     id = id.toString();
 
@@ -80,10 +90,12 @@ class CategoryController {
         search: search
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al buscar categoría: ${err.message}`
-      });
-    }
+      request.flash("error", `Error al buscar categoría: ${err.message}`);
+      response.redirect("/categories");
+      // response.render("message", {
+      //   message: `Error al buscar categoría: ${err.message}`
+      // });
+    };
   }
 
   async handleUpdateCategory(request: Request, response: Response) {
@@ -91,15 +103,19 @@ class CategoryController {
 
     try {
       await this.categoryService.updateCategory({ id, nombre }).then(() => {
-        response.render("message", {
-          message: "Categoría actualizada con éxito"
-        });
+        request.flash("sucess", "Categoría actualizada con éxito")
+        response.redirect("/categories");
+        // response.render("message", {
+        //   message: "Categoría actualizada con éxito"
+        // });
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al actualizar categoría: ${err.message}`
-      });
-    }
+      request.flash("error", `Error al actualizar categoría: ${err.message}`);
+      response.redirect("/categories");
+      // response.render("message", {
+      //   message: `Error al actualizar categoría: ${err.message}`
+      // });
+    };
   }
 }
 

@@ -5,6 +5,7 @@ import { UsersRepository } from "../repositories/UsersRepository";
 interface IUser {
   id?: string;
   username: string;
+  password: string;
   email: string;
   telefono: string;
   ciudad: string;
@@ -12,8 +13,8 @@ interface IUser {
 }
 
 class UserService {
-  async createUser({ username, email, telefono, ciudad, provincia }: IUser) {
-    if (!username || !email || !telefono || !ciudad || !provincia) {
+  async createUser({ username, password, email, telefono, ciudad, provincia }: IUser) {
+    if (!username || !password || !email || !telefono || !ciudad || !provincia) {
       throw new Error("Por favor complete todos los campos");
     }
 
@@ -31,7 +32,7 @@ class UserService {
       throw new Error("Email ya está cargado");
     }
 
-    const user = usersRepository.create({ username, email, telefono, ciudad, provincia });
+    const user = usersRepository.create({ username, password, email, telefono, ciudad, provincia });
 
     await usersRepository.save(user);
 
@@ -89,13 +90,13 @@ class UserService {
 
   }
 
-  async updateUser({ id, username, email, telefono, ciudad, provincia }: IUser) {
+  async updateUser({ id, username, password, email, telefono, ciudad, provincia }: IUser) {
     const usersRepository = getCustomRepository(UsersRepository);
 
     const user = await usersRepository
       .createQueryBuilder()
       .update(User)
-      .set({ username, email, telefono, ciudad, provincia })
+      .set({ username, password, email, telefono, ciudad, provincia })
       .where("id = :id", { id })
       .execute();
 

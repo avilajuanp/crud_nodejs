@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserService from "../services/UserService";
+import { Utils } from "../utils";
 
 class UserController {
   //instanciamos userService global para todos los métodos
@@ -15,24 +16,23 @@ class UserController {
   }
 
   async handleCreateUser(request: Request, response: Response) {
-    const { username, email, telefono, ciudad, provincia } = request.body;
+    const { username, password, email, telefono, ciudad, provincia } = request.body;
 
     try {
       await this.userService.createUser({
         username,
+        password: await Utils.encryptPassword(password),
         email,
         telefono,
         ciudad,
-        provincia
+        provincia,
       }).then(() => {
-        response.render("message", {
-          message: "Usuario creado con éxito"
-        });
+        request.flash("success", "Usuario creado con éxito");
+        response.redirect("/users");
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al crear usuario: ${err.message}`
-      });
+      request.flash("error", `Error al crear usuario: ${err.message}`
+      );
     }
   }
 
@@ -41,14 +41,12 @@ class UserController {
 
     try {
       await this.userService.deleteUser(id).then(() => {
-        response.render("message", {
-          message: "Usuario borrado con éxito"
-        });
+        request.flash("success", "Usuario borrado con éxito");
+        response.redirect("/users");
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al borrar usuario: ${err.message}`
-      });
+      request.flash("error", `Error al borrar usuario: ${err.message}`
+      );
     }
   }
 
@@ -83,25 +81,30 @@ class UserController {
         search: search
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al buscar usuario: ${err.message}`
-      });
+      request.flash("error", `Error al buscar usuario: ${err.message}`);
+      response.redirect("/users");
     }
   }
 
   async handleUpdateUser(request: Request, response: Response) {
-    const { id, username, email, telefono, ciudad, provincia } = request.body;
+    const { id, username, password, email, telefono, ciudad, provincia } = request.body;
 
     try {
-      await this.userService.updateUser({ id, username, email, telefono, ciudad, provincia }).then(() => {
-        response.render("message", {
-          message: "Usuario actualizado con éxito"
-        });
+      await this.userService.updateUser({
+        id,
+        username,
+        password: await Utils.encryptPassword(password),
+        email,
+        telefono,
+        ciudad,
+        provincia
+      }).then(() => {
+        request.flash("success", "Usuario actualizado con éxito");
+        response.redirect("/users");
       });
     } catch (err) {
-      response.render("message", {
-        message: `Error al actualizar usuario: ${err.message}`
-      });
+      request.flash("error", `Error al actualizar usuario: ${err.message}`);
+      response.redirect("/users");
     }
   }
 }

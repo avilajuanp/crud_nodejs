@@ -23,7 +23,7 @@ class ProductService {
   //   this.updateProduct = this.updateProduct.bind(this)
   // }
 
-  async createProduct({ nombre,categoria,precio }: IProduct) {
+  async createProduct({ nombre, categoria, precio }: IProduct) {
     if (!nombre || !categoria || !precio) {
       throw new Error("Por favor complete todos los campos");
     }
@@ -34,7 +34,7 @@ class ProductService {
       throw new Error("Producto ya existe");
     }
 
-    const product = productsRepository.create({nombre, precio, categoria});
+    const product = productsRepository.create({ nombre, precio, categoria });
 
     await productsRepository.save(product);
 
@@ -66,7 +66,7 @@ class ProductService {
     const productsRepository = getCustomRepository(ProductsRepository);
     //const products = await productsRepository.find();
     const products = await productsRepository.createQueryBuilder('products')
-      .leftJoinAndSelect('products.categoria','categories')
+      .leftJoinAndSelect('products.categoria', 'categories')
       .select(['products', 'categories.nombre'])
       .getMany();
 
